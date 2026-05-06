@@ -1,0 +1,20 @@
+[Unit]
+Description=Agri Admin API (Docker)
+After=network.target docker.service mysqld.service redis.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=/opt/agri-platform/admin-api
+ExecStartPre=-/usr/bin/docker rm -f agri-admin-api
+ExecStart=/usr/bin/docker run -d \
+  --name agri-admin-api \
+  --restart unless-stopped \
+  --env-file /opt/agri-platform/admin-api/.env.production \
+  -p 127.0.0.1:3001:3001 \
+  agri-admin-api:latest
+ExecStop=/usr/bin/docker rm -f agri-admin-api
+
+[Install]
+WantedBy=multi-user.target

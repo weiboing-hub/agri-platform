@@ -1,0 +1,33 @@
+USE `agri_iot_platform_dev`;
+
+CREATE TABLE IF NOT EXISTS `iot_camera_capture_plans` (
+  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '抓图计划主键',
+  `plan_no` VARCHAR(64) NOT NULL COMMENT '抓图计划编号',
+  `tenant_id` BIGINT UNSIGNED DEFAULT NULL COMMENT '所属租户ID',
+  `camera_id` BIGINT UNSIGNED NOT NULL COMMENT '摄像头ID',
+  `plan_name` VARCHAR(128) NOT NULL COMMENT '计划名称',
+  `schedule_type` VARCHAR(32) NOT NULL DEFAULT 'interval' COMMENT '调度类型：interval/daily',
+  `interval_minutes` INT DEFAULT NULL COMMENT '固定间隔分钟数',
+  `daily_time` CHAR(5) DEFAULT NULL COMMENT '每日触发时间 HH:mm',
+  `capture_purpose` VARCHAR(32) NOT NULL DEFAULT 'preview' COMMENT '抓图用途：preview/evidence/analysis/report',
+  `status` VARCHAR(32) NOT NULL DEFAULT 'enabled' COMMENT '状态：enabled/disabled',
+  `next_trigger_at` DATETIME DEFAULT NULL COMMENT '下一次触发时间',
+  `last_triggered_at` DATETIME DEFAULT NULL COMMENT '最近触发时间',
+  `last_success_at` DATETIME DEFAULT NULL COMMENT '最近成功时间',
+  `last_failure_at` DATETIME DEFAULT NULL COMMENT '最近失败时间',
+  `last_job_id` BIGINT UNSIGNED DEFAULT NULL COMMENT '最近任务ID',
+  `last_snapshot_id` BIGINT UNSIGNED DEFAULT NULL COMMENT '最近快照ID',
+  `last_error_message` VARCHAR(255) DEFAULT NULL COMMENT '最近错误信息',
+  `remark` VARCHAR(255) DEFAULT NULL COMMENT '备注',
+  `created_by` BIGINT UNSIGNED DEFAULT NULL COMMENT '创建人',
+  `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_iot_camera_capture_plans_plan_no` (`plan_no`),
+  KEY `idx_iot_camera_capture_plans_tenant_id` (`tenant_id`, `status`, `next_trigger_at`),
+  KEY `idx_iot_camera_capture_plans_camera_id` (`camera_id`, `status`),
+  KEY `idx_iot_camera_capture_plans_schedule` (`status`, `schedule_type`, `next_trigger_at`),
+  CONSTRAINT `fk_iot_camera_capture_plans_tenant_id` FOREIGN KEY (`tenant_id`) REFERENCES `sys_tenants` (`id`),
+  CONSTRAINT `fk_iot_camera_capture_plans_camera_id` FOREIGN KEY (`camera_id`) REFERENCES `iot_cameras` (`id`),
+  CONSTRAINT `fk_iot_camera_capture_plans_created_by` FOREIGN KEY (`created_by`) REFERENCES `sys_users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='摄像头抓图计划表';

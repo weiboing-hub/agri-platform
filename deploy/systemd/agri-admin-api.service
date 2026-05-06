@@ -1,0 +1,15 @@
+[Unit]
+Description=Agri Admin API
+After=network.target mysqld.service redis.service
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/agri-platform/admin-api
+EnvironmentFile=/opt/agri-platform/admin-api/.env.production
+ExecStart=/usr/bin/env node src/server.js
+Restart=always
+RestartSec=3
+User=root
+
+[Install]
+WantedBy=multi-user.target
