@@ -1,10 +1,39 @@
+# 依赖目录
 admin-api/node_modules/
 admin-web/node_modules/
+
+# 前端构建与测试产物
 admin-web/dist/
+admin-web/.vite/
+admin-web/coverage/
+
+# 后端测试与运行产物
+admin-api/coverage/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# 本地环境文件
+admin-api/.env
+admin-api/.env.local
+admin-api/.env.development.local
+admin-api/.env.production.local
+admin-web/.env.local
+admin-web/.env.development.local
+admin-web/.env.production.local
+
+# 编辑器与系统文件
 .DS_Store
 .claude/
+.idea/
+.vscode/
+
+# 本地备份与预览产物
 backups/
 docs/ql-preview/
 docs/render-*/
+
+# 当前仓库中的临时本地文件
 b41985142e90418555c5de451170f682.jpg
 D
