@@ -5,7 +5,7 @@
 本说明只适用于当前这个独立仓库：
 
 - 仓库目录：`/Users/mac/Documents/New project/agri-platform`
-- 远端仓库：`https://github.com/weiboing-hub/liuwb.git`
+- 远端仓库：`https://github.com/weiboing-hub/agri-platform.git`
 - 默认分支：`main`
 
 注意：
