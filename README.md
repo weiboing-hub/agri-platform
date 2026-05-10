@@ -5,7 +5,6 @@
 补充文档：
 
 - [Git仓库使用说明](./docs/Git仓库使用说明.md)
-- [Home Assistant + ESPHome + MQTT 接入说明](./docs/home-assistant-esphome-mqtt.md)
 
 目录结构：
 
