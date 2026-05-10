@@ -17,6 +17,7 @@
 - 首页：[http://82.156.45.208/](http://82.156.45.208/)
 - 健康检查：[http://82.156.45.208/healthz](http://82.156.45.208/healthz)
 - API 文档：[http://82.156.45.208/docs/](http://82.156.45.208/docs/)
+- MQTT Broker：`82.156.45.208:1883`
 
 ### 2.2 关键业务页面
 
@@ -167,6 +168,18 @@
 - `apiHost`
 - `reportIntervalMs`
 - `controlPollIntervalMs`
+
+#### MQTT 接入参数（如后续切 MQTT）
+
+- Host：`82.156.45.208`
+- Port：`1883`
+- Username：`esp32`
+- Password：由服务器 `/root/mqtt-broker-info.txt` 维护
+
+说明：
+
+- 当前现场主链路仍是 HTTP 上报 + HTTP 控制
+- MQTT Broker 已部署完成，后续如果固件切 MQTT，可直接复用这组服务端连接信息
 
 #### RS485 参数
 
